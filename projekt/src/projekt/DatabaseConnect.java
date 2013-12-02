@@ -14,20 +14,26 @@ import java.sql.Statement;
  */
 public  class DatabaseConnect {
     private boolean isConnect = false;
-    private final String url = "jdbc:mysql://localhost:3306/test";
-    private final String user = "root";
-    private final String password = "root";
-    
+//    private final String url = "jdbc:derby://localhost:1527/APP;create=true";
+//    private final String user = "app";
+//    private final String password = "root";
+     private String driver = "org.apache.derby.jdbc.ClientDriver"; 
     public  boolean Connect(){
         try{
-            Connection con = DriverManager.getConnection(url, user, password);
+            Class.forName(driver).newInstance(); 
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/test","root","root");
             Statement stmn =  con.createStatement();
             
-            //String name  = "lucas";
-            //int phone = 3242;
+//            String name  = "lucas";
+//            int phone = 3242;
             
-            //String insert = "INSERT INTO zkouska VALUE('"+name+"', "+phone+")";
-             //stmn.executeUpdate(insert);
+            //String insert = "INSERT INTO ZKOUSKA VALUE('"+name+"', "+phone+")";
+           //  stmn.executeUpdate("INSERT INTO APP.zkouska VALUE('asdasd',2)");
+             
+             stmn.executeUpdate("INSERT INTO APP.zkouska"
+        + " (name, phone)"
+        + " VALUES ('tomas', 23)");
+             isConnect = true;
         }
         catch(Exception ex){
             
