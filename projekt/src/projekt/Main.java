@@ -21,6 +21,10 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        Init();
+    }
+
+    public void Init(){
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
@@ -31,10 +35,8 @@ public class Main extends javax.swing.JFrame {
         //Uschovany naformatovany datum splatnosti
         jLabel9.setVisible(false);
         jDateChooser1.setDateFormatString("yyyy-M-d");
-        
-       
+  
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +52,9 @@ public class Main extends javax.swing.JFrame {
         fakturyList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fakturyQuery.getResultList();
         jFrame1 = new javax.swing.JFrame();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        testPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("testPU").createEntityManager();
+        fakturyQuery1 = java.beans.Beans.isDesignTime() ? null : testPUEntityManager.createQuery("SELECT f FROM Faktury f");
+        fakturyList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fakturyQuery1.getResultList();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -94,18 +99,18 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fakturyList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fakturyList1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cisloFaktury}"));
         columnBinding.setColumnName("Cislo Faktury");
         columnBinding.setColumnClass(Long.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${jmeno}"));
         columnBinding.setColumnName("Jmeno");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${adresa}"));
-        columnBinding.setColumnName("Adresa");
-        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mesto}"));
         columnBinding.setColumnName("Mesto");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${adresa}"));
+        columnBinding.setColumnName("Adresa");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${psc}"));
         columnBinding.setColumnName("Psc");
@@ -308,8 +313,15 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:)
-        DatabaseConnect c = new DatabaseConnect();
-        c.Connect();
+        DatabaseConnect db = new DatabaseConnect();
+        try{
+            db.Connect();
+            db.InsertQuery("");
+        }
+        catch(Exception e){}
+        finally{
+            db.DisConnect();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -348,7 +360,9 @@ public class Main extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<projekt.Faktury> fakturyList;
+    private java.util.List<projekt.Faktury> fakturyList1;
     private javax.persistence.Query fakturyQuery;
+    private javax.persistence.Query fakturyQuery1;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -373,6 +387,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.persistence.EntityManager samplePUEntityManager;
+    private javax.persistence.EntityManager testPUEntityManager;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

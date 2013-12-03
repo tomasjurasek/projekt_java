@@ -46,6 +46,29 @@
         <Property name="text" type="java.lang.String" value="jCheckBoxMenuItem1"/>
       </Properties>
     </Component>
+    <Component class="javax.persistence.EntityManager" name="testPUEntityManager">
+      <Properties>
+        <Property name="persistenceUnit" type="java.lang.String" value="testPU"/>
+      </Properties>
+    </Component>
+    <Component class="javax.persistence.Query" name="fakturyQuery1">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT f FROM Faktury f"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="testPUEntityManager"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="fakturyList1">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="fakturyQuery1"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;projekt.Faktury&gt;"/>
+      </AuxValues>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -124,17 +147,17 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="jTable1">
                   <BindingProperties>
-                    <BindingProperty name="elements" source="fakturyList" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
+                    <BindingProperty name="elements" source="fakturyList1" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
                       <Subbinding sourcePath="${cisloFaktury}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Long.class"/>
                       </Subbinding>
                       <Subbinding sourcePath="${jmeno}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                       </Subbinding>
-                      <Subbinding sourcePath="${adresa}">
+                      <Subbinding sourcePath="${mesto}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                       </Subbinding>
-                      <Subbinding sourcePath="${mesto}">
+                      <Subbinding sourcePath="${adresa}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                       </Subbinding>
                       <Subbinding sourcePath="${psc}">
