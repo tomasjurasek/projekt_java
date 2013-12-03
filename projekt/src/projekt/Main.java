@@ -316,7 +316,7 @@ public class Main extends javax.swing.JFrame {
         DatabaseConnect db = new DatabaseConnect();
         try{
             db.Connect();
-            db.InsertQuery("");
+            db.InsertQuery(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText(),jLabel6.getText(),jLabel9.getText());
         }
         catch(Exception e){}
         finally{

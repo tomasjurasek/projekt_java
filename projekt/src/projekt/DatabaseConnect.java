@@ -7,6 +7,7 @@ package projekt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import org.apache.derby.client.am.DateTime;
 
 /**
  *
@@ -42,13 +43,13 @@ public  class DatabaseConnect {
         return isConnect;
     }
      
-     public  void InsertQuery(String query){
+     public  void InsertQuery(String CisloFaktury,String Jmeno,String Adresa, String Mesto, String PSC, String Vystaveni,String Splatnost){
          try{
             stmn =  con.createStatement();
          
-            stmn.executeUpdate("INSERT INTO APP.zkouska"
-                + " (name, phone)"
-                + " VALUES ('TOMAS', 12)");
+            stmn.executeUpdate("INSERT INTO APP.FAKTURY"
+                + " (CISLO_FAKTURY, JMENO,MESTO,ADRESA,PSC,VYSTAVENI,SPLATNOST)"
+                + " VALUES ("+ Integer.parseInt(CisloFaktury)+",'"+Jmeno+"','" + Adresa+"', '"+ Mesto +"','"+PSC+"','"+Vystaveni+"','"+Splatnost+"' )");
          
          }catch(Exception ex){}
          
