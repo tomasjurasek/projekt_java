@@ -4,6 +4,7 @@
  */
 package projekt;
 
+import com.itextpdf.text.Document;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
