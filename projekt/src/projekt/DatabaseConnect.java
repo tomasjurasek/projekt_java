@@ -56,7 +56,7 @@ public  class DatabaseConnect {
      public  void InsertQuery(String CisloFaktury,String Jmeno,String Adresa, String Mesto, String PSC, String Vystaveni,String Splatnost){
          try{
             stmn =  con.createStatement();
-         
+            stmn.executeUpdate("delete from APP.FAKTURY where cislo_faktury=" +Integer.parseInt(CisloFaktury));
             stmn.executeUpdate("INSERT INTO APP.FAKTURY"
                 + " (CISLO_FAKTURY, JMENO,MESTO,ADRESA,PSC,VYSTAVENI,SPLATNOST)"
                 + " VALUES ("+ Integer.parseInt(CisloFaktury)+",'"+Jmeno+"','" + Adresa+"', '"+ Mesto +"','"+PSC+"','"+Vystaveni+"','"+Splatnost+"' )");
