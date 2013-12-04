@@ -4,10 +4,12 @@
  */
 package projekt;
 
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
@@ -99,6 +101,30 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cislo Faktury", "Jmeno", "Adresa", "Mesto", "Psc", "Vystaveni", "Splatnost"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fakturyList1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cisloFaktury}"));
         columnBinding.setColumnName("Cislo Faktury");
@@ -106,24 +132,28 @@ public class Main extends javax.swing.JFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${jmeno}"));
         columnBinding.setColumnName("Jmeno");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mesto}"));
-        columnBinding.setColumnName("Mesto");
-        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${adresa}"));
         columnBinding.setColumnName("Adresa");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mesto}"));
+        columnBinding.setColumnName("Mesto");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${psc}"));
         columnBinding.setColumnName("Psc");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${splatnost}"));
-        columnBinding.setColumnName("Splatnost");
-        columnBinding.setColumnClass(java.util.Date.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${vystaveni}"));
         columnBinding.setColumnName("Vystaveni");
         columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${splatnost}"));
+        columnBinding.setColumnName("Splatnost");
+        columnBinding.setColumnClass(java.util.Date.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -161,7 +191,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel5.setText("PSČ");
 
-        jButton1.setText("Přidej");
+        jButton1.setText("Ulozit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -323,6 +353,36 @@ public class Main extends javax.swing.JFrame {
             db.DisConnect();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        ResultSet result = null;
+        try{
+           int row = jTable1.getSelectedRow();
+           int column = jTable1.getSelectedColumn();
+           String TableClicked = (jTable1.getModel().getValueAt(row, 0).toString());
+           
+           DatabaseConnect c = new DatabaseConnect();
+           c.Connect();
+           
+             result = c.SelectQuery("select * from APP.FAKTURY where CISLO_FAKTURY  = "+Integer.parseInt(TableClicked)+"");
+            if(result.next())
+            {   
+               
+                jTextField1.setText(result.getString("cislo_faktury"));
+                jTextField2.setText(result.getString("jmeno"));
+                jTextField3.setText(result.getString("mesto"));
+                jTextField4.setText(result.getString("adresa"));
+                jTextField5.setText(result.getString("psc"));
+                jLabel6.setText(result.getString("vystaveni"));
+                jLabel9.setText(result.getString("splatnost"));
+                
+            }
+           
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

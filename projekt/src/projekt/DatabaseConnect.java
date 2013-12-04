@@ -6,6 +6,7 @@ package projekt;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import org.apache.derby.client.am.DateTime;
 
@@ -21,12 +22,13 @@ public  class DatabaseConnect {
      private  String driver = "org.apache.derby.jdbc.ClientDriver"; 
      private  Connection con = null;
      private  Statement stmn = null;
+     private ResultSet rs = null;
      public   boolean Connect(){
         boolean isConnect = false;
         try{
              Class.forName(driver).newInstance(); 
              con = DriverManager.getConnection("jdbc:derby://localhost:1527/test","root","root");
-             
+             //con.prepareStatement(driver);
             
 //            String name  = "lucas";
 //            int phone = 3242;
@@ -42,7 +44,15 @@ public  class DatabaseConnect {
         }
         return isConnect;
     }
-     
+     public ResultSet SelectQuery(String sql){
+         
+         try{
+           stmn = con.createStatement();
+           rs = stmn.executeQuery(sql);
+         }catch(Exception ex){}
+         
+         return  rs;
+     }
      public  void InsertQuery(String CisloFaktury,String Jmeno,String Adresa, String Mesto, String PSC, String Vystaveni,String Splatnost){
          try{
             stmn =  con.createStatement();
