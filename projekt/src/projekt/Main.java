@@ -101,30 +101,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cislo Faktury", "Jmeno", "Adresa", "Mesto", "Psc", "Vystaveni", "Splatnost"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fakturyList1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cisloFaktury}"));
         columnBinding.setColumnName("Cislo Faktury");
@@ -149,6 +125,7 @@ public class Main extends javax.swing.JFrame {
         columnBinding.setColumnClass(java.util.Date.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -164,9 +141,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 186, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Zobraz", jPanel2);
@@ -295,7 +270,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
 
@@ -309,10 +284,7 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         bindingGroup.bind();
@@ -362,10 +334,10 @@ public class Main extends javax.swing.JFrame {
            int column = jTable1.getSelectedColumn();
            String TableClicked = (jTable1.getModel().getValueAt(row, 0).toString());
            
-           DatabaseConnect c = new DatabaseConnect();
-           c.Connect();
+           DatabaseConnect db = new DatabaseConnect();
+           db.Connect();
            
-             result = c.SelectQuery("select * from APP.FAKTURY where CISLO_FAKTURY  = "+Integer.parseInt(TableClicked)+"");
+             result = db.SelectQuery("select * from APP.FAKTURY where CISLO_FAKTURY  = "+Integer.parseInt(TableClicked)+"");
             if(result.next())
             {   
                
