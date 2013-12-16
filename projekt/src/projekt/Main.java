@@ -370,6 +370,7 @@ public class Main extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:)
         DatabaseConnect db = new DatabaseConnect();
+         ResultSet result = null;
         try{
             db.Connect();
             db.InsertQuery(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText(),jLabel6.getText(),jLabel9.getText());
@@ -378,6 +379,18 @@ public class Main extends javax.swing.JFrame {
         finally{
             db.DisConnect();
         }
+        
+        try{
+            
+        String sql ="select * from APP.FAKTURY";
+        db.Connect();
+     
+        result = db.SelectQuery(sql); 
+        jTable1.setModel(DbUtils.resultSetToTableModel(result));
+        
+        
+        
+        }catch(Exception ex){}
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
