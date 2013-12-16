@@ -25,7 +25,7 @@ public class PDF {
       Document document = new Document();
       PdfWriter.getInstance(document, new FileOutputStream("faktura_"+id+".pdf"));
       document.open();
-       document.add(new Paragraph("                                         FAKTURA", FontFactory.getFont(FontFactory.TIMES_BOLD,20)));
+      document.add(new Paragraph("                                         FAKTURA", FontFactory.getFont(FontFactory.TIMES_BOLD,20)));
       document.add(new Paragraph("Cislo Faktury: " + id, FontFactory.getFont(FontFactory.TIMES_BOLD,20)));
       document.add(new Paragraph("Jmeno: " + jmeno));
       document.add(new Paragraph("Adresa: " + adresa));
