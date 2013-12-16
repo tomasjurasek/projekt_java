@@ -4,8 +4,7 @@
  */
 package projekt;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.FileNotFoundException;
@@ -20,7 +19,7 @@ import javax.swing.JOptionPane;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
- *
+ * Hlavni trida, ktera se stara o zobrazeni a funkci komponent
  * @author silent
  */
 public class Main extends javax.swing.JFrame {
@@ -35,7 +34,9 @@ public class Main extends javax.swing.JFrame {
         
         
     }
-
+    /**
+     * inicializacni metoda, kde inicializuji komponenty na defaultni hodnotu
+     */
     public void Init(){
         jTextField1.setText("");
         jTextField2.setText("");
@@ -365,7 +366,9 @@ public class Main extends javax.swing.JFrame {
 
         jLabel6.setText(dateFormat.format(cal.getTime()));
     }//GEN-LAST:event_jTabbedPane1StateChanged
-
+    /**
+     * Metoda pri kliku na urcity radek v tabulce prenese data do komponent jTextField
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         ResultSet result = null;
@@ -401,7 +404,9 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    /**
+     * Metoda, ktera pri kliku na tlacitko ulozit pdf vezme informace o fakture a vytvori PDF
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //CALL PDF
@@ -417,7 +422,9 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nejsou vyplneny policka");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    /**
+     * Metoda, ktera naformatuje datum a ulozi ho do komponenty
+     */
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
         // TODO add your handling code here:
         //DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -430,7 +437,9 @@ public class Main extends javax.swing.JFrame {
         String dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
         jLabel9.setText(dateString);
     }//GEN-LAST:event_jDateChooser1PropertyChange
-
+    /**
+     * Metoda, ktera pri kliku na tlacitko ulozit vezme informace o fakture a ulozi je do db
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:)
 

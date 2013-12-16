@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
- *
+ * Trida pro zobrazeni dat z databazi do tabulky
  * @author silent
  */
 @Entity

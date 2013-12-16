@@ -4,9 +4,8 @@
  */
 package projekt;
 
-import com.itextpdf.text.Chunk;
+
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -14,12 +13,22 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
 
+
 /**
- *
+ * Trida pro praci s PDF
  * @author silent
  */
 public class PDF {
-    
+    /**
+     * Metoda, ktera verze parametry a vytvori z nich PFD
+     * @param  id je identifikator faktury
+     * @param jmeno je jmeno, ktere je uvedeno na fakture
+     * @param adresa je adresa, na kterou se vystavy faktura
+     * @param mesto je misto, kde je zakaznik
+     * @param psc je psc mesta
+     * @param datum_vystaveni je datum vystaveni faktury
+     * @param datum_splatnosti je datum splatnosti faktury
+     */
     public void tisk(String id,String jmeno,String adresa, String mesto,String psc, String datum_vystaveni,String datum_splatnosti) {
       try{
       Document document = new Document();

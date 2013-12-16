@@ -16,8 +16,15 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
+/**
+ * Trida pro refresh tabulky
+ * @author silent
+ */
 public class DbUtils {
+    /**
+     * Metoda, na refresh table a zobrazi nove data
+     * @param rs je vysledek selectu na db
+     */
     public static TableModel resultSetToTableModel(ResultSet rs) {
         try {
             ResultSetMetaData metaData = rs.getMetaData();
