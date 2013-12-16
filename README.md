@@ -1,4 +1,15 @@
-projekt_java
-============
+Vytváøení a správa faktur
+Použité technologie :  	Java swing
+		        Derby databáze
+			Github – správa zdrojových kódu
 
-Tenhle projekt bych chtel, aby se zakladat na praci s mysql db a praci s pdf
+Použité komponenty:	JCalendar
+			iText
+
+Program umí vytvoøit fakturu na urèitou osobu, taky umí editovat již vytvoøenou fakturu, a nadále na danou fakturu vytvoøit pdf.
+
+Tøídy:
+			DatabaseConnect – komunikuje s databází, pøipoj, select,insert,odpoj
+			Faktury – komunikace mezi databázi a tabulkou
+			PDF  - pracuje s fakturami, z kterých vytváøí PFD soubory
+			
