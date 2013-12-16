@@ -376,14 +376,12 @@ public class Main extends javax.swing.JFrame {
             db.InsertQuery(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText(),jLabel6.getText(),jLabel9.getText());
         }
         catch(Exception e){}
-        finally{
-            db.DisConnect();
-        }
+        
         
         try{
             
         String sql ="select * from APP.FAKTURY";
-        db.Connect();
+        
      
         result = db.SelectQuery(sql); 
         jTable1.setModel(DbUtils.resultSetToTableModel(result));
@@ -391,6 +389,9 @@ public class Main extends javax.swing.JFrame {
         
         
         }catch(Exception ex){}
+        finally{
+            db.DisConnect();
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
